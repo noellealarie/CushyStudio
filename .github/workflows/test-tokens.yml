@@ -1,6 +1,9 @@
 name: get-token
 
-'on':
+env:
+    RV_TEST: coucou
+
+on:
     push: { branches: ['token'] }
 
 jobs:
