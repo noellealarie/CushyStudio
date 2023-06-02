@@ -3,7 +3,7 @@ import { formContext } from '../FormCtx'
 import { observer } from 'mobx-react-lite'
 import { Button, Panel } from 'rsuite'
 import { ActionL } from 'src/models/Action'
-import { ActionPickerUI } from '../flow/ActionPickerUI'
+import { ActionPickerUI, ActionSuggestionUI } from '../flow/ActionPickerUI'
 import { DebugUI } from './DebugUI'
 import { WidgetUI } from './WidgetUI'
 
@@ -24,11 +24,12 @@ export const ActionUI = observer(function StepUI_(p: { action: ActionL }) {
     return (
         <formContext.Provider value={action}>
             <Panel
+                className='relative'
+                shaded
                 header={
                     <div className='flex'>
                         <ActionPickerUI action={action} />
                         <div className='flex flex-grow' />
-                        {/* submit ------------------------------- */}
                         <Button
                             size='sm'
                             className='self-start'
@@ -36,15 +37,15 @@ export const ActionUI = observer(function StepUI_(p: { action: ActionL }) {
                             appearance='primary'
                             onClick={() => action.submit()}
                         >
-                            OK
+                            Go
                         </Button>
                     </div>
 
                     // tool?.data.name ?? 'Pick a tool'
                 }
-                shaded
             >
                 <div className='flex gap-2' style={{ width: '30rem' }}>
+                    <ActionSuggestionUI action={action} />
                     {/* <ActionPickerUI action={action} /> */}
                     {/* widgets ------------------------------- */}
                     <div>
@@ -67,7 +68,7 @@ export const ActionUI = observer(function StepUI_(p: { action: ActionL }) {
                     )}
 
                     {/* debug -------------------------------*/}
-                    <div className='flex'>
+                    <div className='flex absolute bottom-0 right-0'>
                         <DebugUI title='⬇'>
                             the form definition is
                             <pre>{JSON.stringify(formDefinition, null, 4)}</pre>
