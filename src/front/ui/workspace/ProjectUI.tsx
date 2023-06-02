@@ -9,13 +9,13 @@ export const ProjectUI = observer(function ProjectUI_(p: {}) {
     return (
         <Panel>
             <div className='row'>
-                <IconButton onClick={() => project.delete()} icon={<I.Trash />} />
                 <Input
                     value={project.data.name}
                     onChange={(next) => project.update({ name: next })}
                     placeholder='Project name'
                     name='title'
                 />
+                <IconButton appearance='subtle' onClick={() => project.delete()} icon={<I.Trash />} />
             </div>
             <div className='row'>
                 <div className='flex flex-col gap-2 items-start'>

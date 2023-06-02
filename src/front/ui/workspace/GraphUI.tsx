@@ -5,6 +5,7 @@ import { Fragment } from 'react'
 import { Panel } from 'rsuite'
 import { ActionUI } from '../widgets/ActionUI'
 import { StepUI } from './StepUI'
+import { CustomNodeFlow } from '../graph/Graph2UI'
 
 export const GraphSummaryUI = observer(function GraphSummaryUI_(p: { graph: GraphL }) {
     const graph = p.graph
@@ -14,6 +15,7 @@ export const GraphSummaryUI = observer(function GraphSummaryUI_(p: { graph: Grap
             {graph.summary1.map((i, ix) => (
                 <div key={ix}>- {i}</div>
             ))}
+            <CustomNodeFlow />
         </Panel>
     )
 })
