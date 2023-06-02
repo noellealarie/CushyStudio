@@ -45,7 +45,7 @@ export const ActionUI = observer(function StepUI_(p: { action: ActionL }) {
                 }
             >
                 <div className='flex gap-2' style={{ width: '30rem' }}>
-                    <ActionSuggestionUI action={action} />
+                    {/* <ActionSuggestionUI action={action} /> */}
                     {/* <ActionPickerUI action={action} /> */}
                     {/* widgets ------------------------------- */}
                     <div>

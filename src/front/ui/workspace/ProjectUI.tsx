@@ -1,6 +1,6 @@
 import * as I from '@rsuite/icons'
 import { observer } from 'mobx-react-lite'
-import { IconButton, Input, Panel } from 'rsuite'
+import { Divider, IconButton, Input, Panel } from 'rsuite'
 import { useProject } from '../../ProjectCtx'
 import { GraphUI } from './GraphUI'
 
@@ -17,8 +17,9 @@ export const ProjectUI = observer(function ProjectUI_(p: {}) {
                 />
                 <IconButton appearance='subtle' onClick={() => project.delete()} icon={<I.Trash />} />
             </div>
+            <Divider />
             <div className='row'>
-                <div className='flex flex-col gap-2 items-start'>
+                <div className='flex flex-col items-start'>
                     {/* <EmptyGraphUI /> */}
                     <GraphUI graph={project.rootGraph.item} depth={1} />
                     {/* {project.steps.map((step) => i(
