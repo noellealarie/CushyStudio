@@ -3,11 +3,10 @@ import type { GraphL } from 'src/models/Graph'
 import { observer } from 'mobx-react-lite'
 import { Fragment } from 'react'
 import { Divider, Panel } from 'rsuite'
+import { NodeRefUI } from '../NodeRefUI'
+import { CustomNodeFlow } from '../graph/Graph2UI'
 import { ActionUI } from '../widgets/ActionUI'
 import { StepUI } from './StepUI'
-import { CustomNodeFlow } from '../graph/Graph2UI'
-import { NodeRefUI } from '../NodeRefUI'
-import { ActionSuggestionUI } from '../flow/ActionPickerUI'
 
 export const GraphSummaryUI = observer(function GraphSummaryUI_(p: { graph: GraphL }) {
     const graph = p.graph
@@ -20,7 +19,7 @@ export const GraphSummaryUI = observer(function GraphSummaryUI_(p: { graph: Grap
             <div>
                 {graph.nodes.map((n, ix) => (
                     <div key={n.uid} className='flex'>
-                        <NodeRefUI node={n} />
+                        <NodeRefUI label={ix.toString()} node={n} />
                         {n.$schema.nameInCushy}
                     </div>
                 ))}
@@ -36,9 +35,9 @@ export const GraphUI = observer(function GraphUI_(p: { graph: GraphL; depth: num
     const action0 = actions[0]
     return (
         <Fragment>
-            <div className='flex'>
-                <h4 className='mr-3'>Step {p.depth}</h4>
-                {graph.childSteps.items.length === 0 ? <ActionSuggestionUI action={action0} /> : null}
+            <div className='flex items-baseline'>
+                <div className='mr-1'>#{p.depth}</div>
+                {/* {graph.childSteps.items.length === 0 ? <ActionSuggestionUI action={action0} /> : null} */}
                 {graph.childSteps.map((step) => {
                     const isSelected = step.id === next?.id
                     return (
