@@ -149,7 +149,6 @@ export class GraphL {
     /** @internal update the progress value of the currently focused onde */
     onProgress = (msg: WsMsgProgress) => {
         if (this.currentExecutingNode == null) return console.log('❌ no current executing node', msg)
-
         this.currentExecutingNode.progress = msg.data
     }
 

@@ -3,7 +3,7 @@ import { formContext } from '../FormCtx'
 import { observer } from 'mobx-react-lite'
 import { Button, Panel } from 'rsuite'
 import { ActionL } from 'src/models/Action'
-import { ActionPickerUI2 } from '../flow/ActionPickerUI'
+import { ActionPickerUI } from '../flow/ActionPickerUI'
 import { DebugUI } from './DebugUI'
 import { WidgetUI } from './WidgetUI'
 
@@ -25,13 +25,26 @@ export const ActionUI = observer(function StepUI_(p: { action: ActionL }) {
         <formContext.Provider value={action}>
             <Panel
                 header={
-                    <ActionPickerUI2 action={action} />
+                    <div className='flex'>
+                        <ActionPickerUI action={action} />
+                        <div className='flex flex-grow' />
+                        {/* submit ------------------------------- */}
+                        <Button
+                            size='sm'
+                            className='self-start'
+                            color='green'
+                            appearance='primary'
+                            onClick={() => action.submit()}
+                        >
+                            OK
+                        </Button>
+                    </div>
 
                     // tool?.data.name ?? 'Pick a tool'
                 }
                 shaded
             >
-                <div className='flex gap-2'>
+                <div className='flex gap-2' style={{ width: '30rem' }}>
                     {/* <ActionPickerUI action={action} /> */}
                     {/* widgets ------------------------------- */}
                     <div>
@@ -46,10 +59,7 @@ export const ActionUI = observer(function StepUI_(p: { action: ActionL }) {
                             </div>
                         ))}
                     </div>
-                    {/* submit ------------------------------- */}
-                    <Button size='sm' className='self-start' color='green' appearance='primary' onClick={() => action.submit()}>
-                        OK
-                    </Button>
+
                     {locked ? null : (
                         <pre className='border-2 border-dashed border-orange-200 p-2'>
                             action output = {JSON.stringify(action.data.params, null, 4)}
