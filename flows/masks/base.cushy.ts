@@ -8,7 +8,7 @@ action('💬 Prompt', {
     }),
     run: async (flow, deps) => {
         flow.print(deps.batchSize)
-        flow.nodes.PreviewImage({
+        flow.nodes.SaveImage({
             images: flow.nodes.VAEDecode({
                 samples: flow.nodes.KSampler({
                     seed: flow.randomSeed(),

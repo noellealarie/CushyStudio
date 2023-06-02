@@ -2,10 +2,10 @@ import { formContext } from '../FormCtx'
 
 import { observer } from 'mobx-react-lite'
 import { Button, Panel } from 'rsuite'
-import { WidgetUI } from './WidgetUI'
 import { ActionL } from 'src/models/Action'
+import { ActionPickerUI2 } from '../flow/ActionPickerUI'
 import { DebugUI } from './DebugUI'
-import { ActionPickerUI } from '../flow/ActionPickerUI'
+import { WidgetUI } from './WidgetUI'
 
 /** this is the root interraction widget
  * if a workflow need user-supplied infos, it will send an 'ask' request with a list
@@ -15,18 +15,24 @@ export const ActionUI = observer(function StepUI_(p: { action: ActionL }) {
     // ensure action have a tool
     const action = p.action
     const tool = action.tool.item
-    if (tool == null) return <ActionPickerUI action={action} />
+    // if (tool == null) return <ActionPickerUI action={action} />
 
     // prepare basic infos
-    const formDefinition = tool.data.form ?? {}
-    const title = tool.data.name
+    const formDefinition = tool?.data.form ?? {}
     const locked = action.data.params != null
 
     return (
         <formContext.Provider value={action}>
-            <Panel header={title} shaded>
+            <Panel
+                header={
+                    <ActionPickerUI2 action={action} />
+
+                    // tool?.data.name ?? 'Pick a tool'
+                }
+                shaded
+            >
                 <div className='flex gap-2'>
-                    <ActionPickerUI action={action} />
+                    {/* <ActionPickerUI action={action} /> */}
                     {/* widgets ------------------------------- */}
                     <div>
                         {Object.entries(formDefinition).map(([k, v], ix) => (
@@ -41,7 +47,7 @@ export const ActionUI = observer(function StepUI_(p: { action: ActionL }) {
                         ))}
                     </div>
                     {/* submit ------------------------------- */}
-                    <Button size='lg' color='green' appearance='primary' onClick={() => action.submit()}>
+                    <Button size='sm' className='self-start' color='green' appearance='primary' onClick={() => action.submit()}>
                         OK
                     </Button>
                     {locked ? null : (
@@ -51,7 +57,7 @@ export const ActionUI = observer(function StepUI_(p: { action: ActionL }) {
                     )}
 
                     {/* debug -------------------------------*/}
-                    <div className='flex flex-col'>
+                    <div className='flex'>
                         <DebugUI title='⬇'>
                             the form definition is
                             <pre>{JSON.stringify(formDefinition, null, 4)}</pre>

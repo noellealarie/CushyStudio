@@ -42,7 +42,8 @@ export class ActionL {
     submit = async () => {
         const toolID = this.tool.id
         if (toolID == null) return console.log('❌ no action yet')
-        const outputGraph = this.inputGraph.item.clone()
+        const outputGraph = this.inputGraph.item.clone({ nextStepID: null })
+        // outputGraph.update()
         const step = this.db.steps.create({
             id: asStepID(nanoid()),
             outputGraphID: outputGraph.id,
@@ -51,6 +52,7 @@ export class ActionL {
             toolID: toolID,
             status: Status.New,
         })
+        this.inputGraph.item.update({ nextStepID: step.id })
         await step.start()
     }
 

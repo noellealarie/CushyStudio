@@ -16,4 +16,6 @@ export type ToolT = {
 
 /** a thin wrapper around a single action somewhere in a .cushy.ts file */
 export interface ToolL extends LiveInstance<ToolT, ToolL> {}
-export class ToolL {}
+export class ToolL {
+    get name() { return this.data.name } // prettier-ignore
+}

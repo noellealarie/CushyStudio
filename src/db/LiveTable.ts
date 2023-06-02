@@ -65,8 +65,8 @@ export class LiveTable<T extends { id: string }, L extends LiveInstance<T, L>> {
                 this.onUpdate?.(prev, this.data)
             }
 
-            clone(): T {
-                const cloneData = Object.assign({}, toJS(this.data), { id: nanoid() })
+            clone(t?: Partial<T>): T {
+                const cloneData = Object.assign({}, toJS(this.data), { id: nanoid(), ...t })
                 // console.log(`🔴 cloneData:`, cloneData)
                 // console.log(`🔴 this.data=`, this.data)
                 return this.table.create(cloneData)

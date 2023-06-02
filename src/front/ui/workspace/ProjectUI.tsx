@@ -20,7 +20,7 @@ export const ProjectUI = observer(function ProjectUI_(p: {}) {
             <div className='row'>
                 <div className='flex flex-col gap-2 items-start'>
                     {/* <EmptyGraphUI /> */}
-                    <GraphUI graph={project.rootGraph.item} />
+                    <GraphUI graph={project.rootGraph.item} depth={1} />
                     {/* {project.steps.map((step) => i(
                         <StepUI step={step} key={step.id} />
                     ))} */}

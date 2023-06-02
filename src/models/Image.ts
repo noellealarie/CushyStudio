@@ -8,6 +8,7 @@ import { ComfyImageInfo } from '../types/ComfyWsApi'
 import { AbsolutePath } from '../utils/fs/BrandedPaths'
 import { asAbsolutePath } from '../utils/fs/pathUtils'
 import { LiveRef } from '../db/LiveRef'
+import { join } from 'path'
 
 export type ImageID = Tagged<string, 'ImageUID'>
 export interface ImageT {
@@ -44,7 +45,7 @@ export class ImageL {
 
     /** absolute path on the machine with vscode */
     get localAbsolutePath(): AbsolutePath {
-        return asAbsolutePath(path.join(this.st.cacheFolderPath, 'outputs', this.data.imageInfos.filename))
+        return asAbsolutePath(join(this.st.cacheFolderPath, 'outputs', this.data.imageInfos.filename))
     }
 
     onHydrate = () => {
