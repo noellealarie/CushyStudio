@@ -42,7 +42,7 @@ export const GraphUI = observer(function GraphUI_(p: { graph: GraphL; depth: num
 
             <div className='flex gap-2 items-baseline'>
                 {/* action form */}
-                <ActionUI key={action0.id} action={action0} />
+                {action0 && <ActionUI key={action0.id} action={action0} />}
 
                 {/* input summary */}
                 <GraphSummaryUI graph={graph} />
