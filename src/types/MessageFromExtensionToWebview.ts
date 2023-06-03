@@ -8,7 +8,7 @@ import type { Maybe } from 'src/utils/types'
 import type { PayloadID } from '../core/PayloadID'
 import type { ComfyPromptJSON } from './ComfyPrompt'
 import type { ComfySchemaJSON } from './ComfySchemaJSON'
-import type { WsMsgExecutionCached, WsMsgExecuted, WsMsgExecuting, WsMsgProgress, WsMsgStatus } from './ComfyWsApi'
+import type { WsMsgExecutionCached, WsMsgExecuted, WsMsgExecuting, WsMsgProgress, WsMsgStatus, PromptID } from './ComfyWsApi'
 
 import { exhaust } from '../utils/ComfyUtils'
 import { StepID } from 'src/models/Step'
@@ -82,7 +82,7 @@ export type FromExtension_CushyStatus = { type: 'cushy_status'; connected: boole
 // }
 
 export type FromExtension_Print = { type: 'print'; message: string }
-export type FromExtension_Prompt = { type: 'prompt'; graph: ComfyPromptJSON }
+export type FromExtension_Prompt = { type: 'prompt'; promptID: PromptID }
 export type FromExtension_Images = { type: 'images'; flowID?: Maybe<FlowID>; images: ImageT[] }
 export type FromExtension_ShowHtml = { type: 'show-html'; flowID?: FlowID; content: string; title: string }
 export type FromExtension_ask = { type: 'ask'; flowID: FlowID; form: FormDefinition; result: FormResult<any> }

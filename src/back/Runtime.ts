@@ -312,7 +312,7 @@ export class Runtime {
         const liveGraph = this.graph
         if (liveGraph == null) throw new Error('no graph')
         const currentJSON = deepCopyNaive(liveGraph.jsonForPrompt)
-        this.step.append({ type: 'prompt', graph: currentJSON })
+        // this.step.append({ type: 'prompt', graph: currentJSON })
         console.info('checkpoint:' + JSON.stringify(currentJSON))
         // const step = new PromptExecution(this, currentJSON)
         // this.steps.unshift(step)
@@ -364,12 +364,14 @@ export class Runtime {
         console.log('prompt status', res.status, res.statusText, prompmtInfo)
 
         const graph = this.st.db.graphs.create({ id: asGraphID(nanoid()), comfyPromptJSON: currentJSON })
+
         const prompt = this.st.db.prompts.create({
             id: prompmtInfo.prompt_id,
             executed: false,
             graphID: graph.id,
             stepID,
         })
+        this.step.append({ type: 'prompt', promptID: prompmtInfo.prompt_id })
 
         return prompt
         // await sleep(1000)

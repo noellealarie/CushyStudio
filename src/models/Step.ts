@@ -16,7 +16,7 @@ export type FormPath = (string | number)[]
 export type StepID = Branded<string, 'StepID'>
 export const asStepID = (s: string): StepID => s as any
 
-type StepOutput = FromExtension_Print | WsMsgExecuted | FromExtension_Prompt | FromExtension_ShowHtml
+export type StepOutput = FromExtension_Print | WsMsgExecuted | FromExtension_Prompt | FromExtension_ShowHtml
 
 export type StepT = {
     id: StepID

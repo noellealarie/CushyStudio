@@ -24,6 +24,7 @@ export const GalleryHoveredPreviewUI = observer(function GalleryHoveredPreviewUI
                     src={st.hovered.comfyURL}
                     style={{
                         //
+                        pointerEvents: 'none',
                         // margin: 'auto',
                         top: '1rem',
                         left: '1rem',
