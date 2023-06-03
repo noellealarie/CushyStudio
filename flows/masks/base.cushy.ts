@@ -20,6 +20,7 @@ action('💬 Prompt', {
                     negative: flow.nodes.CLIPTextEncode({ clip: flow.AUTO, text: deps.negative ?? '' }),
                     sampler_name: 'ddim',
                     scheduler: 'karras',
+                    steps: 20,
                 }),
                 vae: flow.AUTO,
             }),

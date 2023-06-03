@@ -1,8 +1,8 @@
 import { observer } from 'mobx-react-lite'
-import { ImageL, ImageT } from 'src/models/Image'
+import { useDrag } from 'react-dnd'
+import { ImageL } from 'src/models/Image'
 import { useSt } from '../../FrontStateCtx'
 import { ItemTypes } from './DnDItemTypes'
-import { useDrag } from 'react-dnd'
 
 export const GalleryImageUI = observer(function ImageUI_(p: { img: ImageL }) {
     const image = p.img
@@ -20,6 +20,7 @@ export const GalleryImageUI = observer(function ImageUI_(p: { img: ImageL }) {
     return (
         <>
             <img
+                className='scale-in-center'
                 ref={dragRef}
                 loading='lazy'
                 onMouseEnter={() => (st.hovered = image)}

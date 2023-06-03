@@ -27,6 +27,7 @@ import { wildcards } from '../wildcards/wildcards'
 import { NodeBuilder } from './NodeBuilder'
 import { ToolL } from 'src/models/Tool'
 import { Status } from './Status'
+import { marked } from 'marked'
 
 /** script exeuction instance */
 export class Runtime {
@@ -119,11 +120,13 @@ export class Runtime {
     }
 
     showHTMLContent = (p: { htmlContent: string; title: string }) => {
+        this.step.append({ type: 'show-html', content: p.htmlContent, title: p.title })
         // this.st.broadCastToAllClients({ type: 'show-html', content: p.htmlContent, title: p.title })
     }
 
     showMarkdownContent = (p: { title: string; markdownContent: string }) => {
-        // const htmlContent = marked.parse(p.markdownContent)
+        const htmlContent = marked.parse(p.markdownContent)
+        this.step.append({ type: 'show-html', content: htmlContent, title: p.title })
         // this.st.broadCastToAllClients({ type: 'show-html', content: htmlContent, title: p.title })
     }
 
@@ -226,8 +229,9 @@ export class Runtime {
         if (typeof message === 'boolean') return message.toString()
         if (typeof message === 'object')
             return `${message.$schema.nameInCushy}_${message.uid}(${JSON.stringify(message.json, null, 2)})`
-        return '❓'
+        return '❌ (impossible to extract string)'
     }
+
     /** display something in the console */
     print = (message: Printable) => {
         let msg = this.extractString(message)

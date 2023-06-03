@@ -1,6 +1,6 @@
 import type { GraphID, GraphL } from 'src/models/Graph'
 import type { WsMsgExecuted } from 'src/types/ComfyWsApi'
-import type { FromExtension_Print, FromExtension_Prompt } from 'src/types/MessageFromExtensionToWebview'
+import type { FromExtension_Print, FromExtension_Prompt, FromExtension_ShowHtml } from 'src/types/MessageFromExtensionToWebview'
 import type { LiveInstance } from '../db/LiveInstance'
 import type { Branded, Maybe } from '../utils/types'
 
@@ -16,7 +16,7 @@ export type FormPath = (string | number)[]
 export type StepID = Branded<string, 'StepID'>
 export const asStepID = (s: string): StepID => s as any
 
-type StepOutput = FromExtension_Print | WsMsgExecuted | FromExtension_Prompt
+type StepOutput = FromExtension_Print | WsMsgExecuted | FromExtension_Prompt | FromExtension_ShowHtml
 
 export type StepT = {
     id: StepID
@@ -51,6 +51,9 @@ export class StepL {
             })
         }
     }
+    // get steps(){
+    //     return this.runtime?.step
+    // }
 
     get actionParams() { return this.data.params } // prettier-ignore
     tool = new LiveRef<this, ToolL>(this, 'toolID', 'tools')

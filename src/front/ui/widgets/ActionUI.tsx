@@ -7,6 +7,15 @@ import { ActionPickerUI, ActionSuggestionUI } from '../flow/ActionPickerUI'
 import { DebugUI } from './DebugUI'
 import { WidgetUI } from './WidgetUI'
 
+export const ActionPlaceholderUI = observer(function ActionPlaceholderUI_(p: {}) {
+    return (
+        <Panel>
+            <div className='flex gap-2' style={{ width: '30rem' }}>
+                Executing...
+            </div>
+        </Panel>
+    )
+})
 /** this is the root interraction widget
  * if a workflow need user-supplied infos, it will send an 'ask' request with a list
  * of things it needs to know.

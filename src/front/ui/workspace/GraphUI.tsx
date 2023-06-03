@@ -2,8 +2,8 @@ import type { GraphL } from 'src/models/Graph'
 
 import { observer } from 'mobx-react-lite'
 import { Fragment } from 'react'
-import { Divider } from 'rsuite'
-import { ActionUI } from '../widgets/ActionUI'
+import { Divider, Panel } from 'rsuite'
+import { ActionPlaceholderUI, ActionUI } from '../widgets/ActionUI'
 import { StepUI } from './StepUI'
 import { GraphSummaryUI } from './GraphSummaryUI'
 
@@ -14,7 +14,7 @@ export const GraphUI = observer(function GraphUI_(p: { graph: GraphL; depth: num
     const action0 = actions[0]
     return (
         <Fragment>
-            <div className='flex items-baseline'>
+            <div className='flex items-baseline wrap'>
                 {/* depth */}
                 <div className='mr-1'>#{p.depth}</div>
 
@@ -42,12 +42,28 @@ export const GraphUI = observer(function GraphUI_(p: { graph: GraphL; depth: num
 
             <div className='flex gap-2 items-baseline'>
                 {/* action form */}
-                {action0 && <ActionUI key={action0.id} action={action0} />}
+                {action0 ? <ActionUI key={action0.id} action={action0} /> : <ActionPlaceholderUI />}
 
                 {/* input summary */}
                 <GraphSummaryUI graph={graph} />
             </div>
 
+            {next &&
+                next.data.outputs?.map((msg, ix) => {
+                    if (msg.type === 'print')
+                        return (
+                            <Panel collapsible defaultExpanded key={ix} shaded>
+                                <div>
+                                    💬
+                                    {msg.message}
+                                </div>
+                            </Panel>
+                        )
+                    if (msg.type === 'prompt') return <div>{/* {msg.} */}</div>
+                    if (msg.type === 'executed') return <div>✅</div>
+
+                    return <>ok</>
+                })}
             <Divider />
             {/* child */}
             {next && <StepUI key={next.id} step={next} depth={p.depth + 1} />}

@@ -14,11 +14,11 @@ export const VerticalGalleryUI = observer(function VerticalGalleryUI_(p: {}) {
         <div className='flex-col flex'>
             <div className='flex bg-gray-950'>
                 {/* MAIN IMAGE COLUMN */}
-                <div className='flex flex-col' style={{ overflowX: 'auto' }}>
-                    <IconButton disabled icon={<I.Close />} size='xs' appearance='link'></IconButton>
+                <div className='flex flex-col-reverse' style={{ overflowX: 'auto' }}>
                     {st.imageReversed.map((img, ix) => (
                         <GalleryImageUI key={ix} img={img} />
                     ))}
+                    <IconButton disabled icon={<I.Close />} size='xs' appearance='link'></IconButton>
                 </div>
                 {/*  EXTRA FOLDERS */}
                 {st.db.folders.map((v: FolderL) => {
