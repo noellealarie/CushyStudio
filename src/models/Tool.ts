@@ -12,6 +12,8 @@ export type ToolT = {
     name: string
     file: AbsolutePath
     form?: Maybe<FormDefinition>
+    codeTS?: string
+    codeJS?: string
 }
 
 /** a thin wrapper around a single action somewhere in a .cushy.ts file */

@@ -1,7 +1,9 @@
+import * as I from '@rsuite/icons'
 import { observer } from 'mobx-react-lite'
-import { Button, SelectPicker } from 'rsuite'
+import { Button, IconButton, Popover, SelectPicker, Whisper } from 'rsuite'
 import { ActionL } from 'src/models/Action'
 import { useSt } from '../../FrontStateCtx'
+import { TypescriptHighlightedCodeUI } from '../TypescriptHighlightedCodeUI'
 
 export const ActionPickerUI = observer(function ActionPickerUI_(p: { action: ActionL }) {
     const st = useSt()
@@ -17,6 +19,19 @@ export const ActionPickerUI = observer(function ActionPickerUI_(p: { action: Act
                 value={action.data.toolID}
                 onChange={(v) => action.update({ toolID: v })}
             />
+            {action.tool.item?.data.codeTS && (
+                <Whisper
+                    enterable
+                    placement='autoHorizontalStart'
+                    speaker={
+                        <Popover>
+                            <TypescriptHighlightedCodeUI code={action.tool.item?.data.codeTS} />
+                        </Popover>
+                    }
+                >
+                    <IconButton icon={<I.Code />} appearance='subtle' />
+                </Whisper>
+            )}
         </>
     )
 })

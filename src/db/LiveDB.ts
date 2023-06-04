@@ -55,7 +55,12 @@ export class LiveDB {
         this.absPath = this.st.resolveFromRoot(this.relPath)
         console.log('abspath:', this.absPath)
         const exists = existsSync(this.absPath)
-        if (exists) this.store = JSON.parse(readFileSync(this.absPath, 'utf8'))
+        try {
+            if (exists) this.store = JSON.parse(readFileSync(this.absPath, 'utf8'))
+        } catch (error) {
+            console.log(readFileSync(this.absPath, 'utf8'))
+            console.log(error)
+        }
 
         // 2. make it observable
         makeAutoObservable(this)

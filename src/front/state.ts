@@ -320,7 +320,8 @@ export class STATE {
             console.info('[*... step x/4] embeddings fetched')
 
             // 2 ------------------------------------
-            http: console.info('[*... step 2/4] updating schema...')
+            // http:
+            console.info('[*... step 2/4] updating schema...')
             const comfyJSONStr = readableStringify(schema$, 3)
             const comfyJSONBuffer = Buffer.from(comfyJSONStr, 'utf8')
             writeFileSync(this.comfyJSONPath, comfyJSONBuffer, 'utf-8')

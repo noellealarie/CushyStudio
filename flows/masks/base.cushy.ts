@@ -1,34 +1,3 @@
-action('💬 Prompt', {
-    priority: 2,
-    help: 'extract a mak for the given clothes', // <- action help text
-    ui: (form) => ({
-        positive: form.str({}),
-        negative: form.strOpt({}),
-        batchSize: form.int({ default: 1 }),
-    }),
-    run: async (flow, deps) => {
-        flow.print(deps.batchSize)
-        flow.nodes.SaveImage({
-            images: flow.nodes.VAEDecode({
-                samples: flow.nodes.KSampler({
-                    seed: flow.randomSeed(),
-                    latent_image: flow.nodes.EmptyLatentImage({
-                        batch_size: deps.batchSize,
-                    }),
-                    model: flow.AUTO,
-                    positive: flow.nodes.CLIPTextEncode({ clip: flow.AUTO, text: deps.positive }),
-                    negative: flow.nodes.CLIPTextEncode({ clip: flow.AUTO, text: deps.negative ?? '' }),
-                    sampler_name: 'ddim',
-                    scheduler: 'karras',
-                    steps: 20,
-                }),
-                vae: flow.AUTO,
-            }),
-        })
-        await flow.PROMPT()
-    },
-})
-
 action('A. mask-clothes', {
     help: 'extract a mak for the given clothes', // <- action help text
     // vv action require an image and an input text with tag 'clothes'

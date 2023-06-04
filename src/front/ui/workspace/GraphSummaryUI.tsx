@@ -10,7 +10,8 @@ export const GraphSummaryUI = observer(function GraphSummaryUI_(p: { graph: Grap
         <>
             <Panel className='graph-container self-start w-48'>
                 {graph.size === 0 && <div>Empty Graph</div>}
-                <CustomNodeFlow />
+                {/* <CustomNodeFlow /> */}
+                <div>GRAPH DISABLED</div>
             </Panel>
             <div>
                 {graph.nodes.map((n, ix) => (

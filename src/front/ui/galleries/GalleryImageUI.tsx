@@ -34,3 +34,16 @@ export const GalleryImageUI = observer(function ImageUI_(p: { img: ImageL }) {
         </>
     )
 })
+
+export const PlaceholderImageUI = observer(function PlaceholderImageUI_(p: {}) {
+    return (
+        <div>
+            <img
+                className='scale-in-center'
+                loading='lazy'
+                style={{ objectFit: 'contain', width: '64px', height: '64px', padding: '0.2rem', borderRadius: '.5rem' }}
+                src={''}
+            />
+        </div>
+    )
+})

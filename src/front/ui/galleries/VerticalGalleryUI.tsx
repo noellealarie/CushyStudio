@@ -4,7 +4,7 @@ import { observer } from 'mobx-react-lite'
 import { Button, IconButton } from 'rsuite'
 import { useSt } from '../../FrontStateCtx'
 import { GalleryFolderUI } from './GalleryFolderUI'
-import { GalleryImageUI } from './GalleryImageUI'
+import { GalleryImageUI, PlaceholderImageUI } from './GalleryImageUI'
 import * as I from '@rsuite/icons'
 
 export const VerticalGalleryUI = observer(function VerticalGalleryUI_(p: {}) {
@@ -15,6 +15,7 @@ export const VerticalGalleryUI = observer(function VerticalGalleryUI_(p: {}) {
             <div className='flex bg-gray-950'>
                 {/* MAIN IMAGE COLUMN */}
                 <div className='flex flex-col-reverse' style={{ overflowX: 'auto' }}>
+                    <PlaceholderImageUI />
                     {st.imageReversed.map((img, ix) => (
                         <GalleryImageUI key={ix} img={img} />
                     ))}

@@ -37,8 +37,8 @@ export type Requestable =
     /** ?? */
     | BUG
 
-export type Requestable_str = { type: 'str'; label?: string; default?: string }
-export type Requestable_strOpt = { type: 'str?'; label?: string; default?: string }
+export type Requestable_str = { type: 'str'; label?: string; default?: string; textarea?: boolean }
+export type Requestable_strOpt = { type: 'str?'; label?: string; default?: string; textarea?: boolean }
 export type Requestable_int = { type: 'int'; label?: string; default?: number }
 export type Requestable_intOpt = { type: 'int?'; label?: string; default?: number | null }
 export type Requestable_bool = { type: 'bool'; label?: string }
