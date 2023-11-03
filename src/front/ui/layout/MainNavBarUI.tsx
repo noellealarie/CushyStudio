@@ -72,12 +72,6 @@ export const MainNavBarUI = observer(function MainNavBarUI_(p: {}) {
                 icon={<span className='material-symbols-outlined text-yellow-500'>image_search</span>}
                 label='Gallery'
             />
-            <MainNavEntryUI
-                onClick={() => st.layout.addLastImage()}
-                ix='5'
-                icon={<span className='material-symbols-outlined text-yellow-500'>image_search</span>}
-                label='Gallery'
-            />
 
             {/* CONFIG */}
             <MainNavEntryUI
@@ -107,7 +101,7 @@ export const MainNavBarUI = observer(function MainNavBarUI_(p: {}) {
                 onClick={() => st.theme.toggle()}
                 ix='8'
                 icon={<span className='material-symbols-outlined text-amber-800'>{themeIcon}</span>}
-                label='GPU'
+                label='Theme'
             />
         </ButtonGroup>
     )
